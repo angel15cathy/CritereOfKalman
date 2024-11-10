@@ -1,0 +1,11 @@
+Package: CriterionKalman
+Title: kalmanCritereF
+Version: 0.0.0.9000
+Authors@R: 
+    person("Cathy", "Angella", , "evandjeewanecathyangella15@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Kalman's Criterion for Monitoring and Detecting Fraud in Financial Transactions.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
