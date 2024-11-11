@@ -28,7 +28,15 @@ read_control_matrix <- function(nb_states) {
 
   for (i in 1:lignes) {
     ligne <- readline(prompt = paste("Ligne", i, ": "))
-    matrice[i, ] <- as.numeric(unlist(strsplit(ligne, " ")))
+    values <- as.numeric(unlist(strsplit(ligne, " ")))  # Convertit la chaîne en un vecteur de valeurs numériques
+
+    # Vérifie la correspondance avec le nombre de colonnes attendu
+    while (length(values) != colonnes) {
+      cat("Le nombre de valeurs doit correspondre au nombre de colonnes de la matrice. Veuillez réessayer.\n")
+      ligne <- readline(prompt = paste("Ligne", i, ": "))
+      values <- as.numeric(unlist(strsplit(ligne, " ")))
+    }
+    matrice[i, ] <- values
   }
 
   matrice

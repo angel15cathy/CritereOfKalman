@@ -10,23 +10,23 @@
 
 
 read_state_matrix <- function() {
-  # Ask for the number of states
+  # Demande le nombre d'états
   nb_states <- as.integer(readline(prompt = "Entrez le nombre d'états dans le système: "))
 
-  # Read the names of the states
-  name_states <- character(nb_etats)
+  # Lit les noms des états
+  name_states <- character(nb_states)
   for (i in 1:nb_states) {
-    name_states <- readline(prompt = paste("Entrez le nom de l'état", i, ": "))
+    name_states[i] <- readline(prompt = paste("Entrez le nom de l'état", i, ": "))
   }
 
-  # Read the dimension of the states
+  # Lit la dimension des états
   repeat {
     dimensions <- integer(nb_states)
-    for (i in 1:nb_etats) {
-      dimensions[i] <- as.integer(readline(prompt = paste("Entrez la dimension de l'état", noms_etats[i], ": ")))
+    for (i in 1:nb_states) {
+      dimensions[i] <- as.integer(readline(prompt = paste("Entrez la dimension de l'état", name_states[i], ": ")))
     }
 
-    # Check if all dimensions are equal
+    # Vérifie si toutes les dimensions sont égales
     if (length(unique(dimensions)) == 1) {
       dimension_state <- dimensions[1]
       break
@@ -35,16 +35,20 @@ read_state_matrix <- function() {
     }
   }
 
-  # Read the values for each state
+  # Lit les valeurs pour chaque état
   state_matrix <- matrix(NA, nb_states, dimension_state)
-  for (i in 1:nb_state) {
+  for (i in 1:nb_states) {
     cat(paste("Entrez les valeurs de l'état", name_states[i], "séparées par des espaces:\n"))
-    values <- as.numeric(unlist(strsplit(readline(), " ")))
+    input_values <- readline()  # Saisit les valeurs en tant que texte
+    values <- as.numeric(unlist(strsplit(input_values, " ")))  # Convertit en valeurs numériques
+
+    # Vérifie la correspondance avec la dimension spécifiée
     while (length(values) != dimension_state) {
       cat("Le nombre de valeurs doit correspondre à la dimension de l'état. Veuillez réessayer.\n")
-      values <- as.numeric(unlist(strsplit(readline(), " ")))
+      input_values <- readline()
+      values <- as.numeric(unlist(strsplit(input_values, " ")))
     }
-   state_matrix[i, ] <- values
+    state_matrix[i, ] <- values
   }
 
   state_matrix
